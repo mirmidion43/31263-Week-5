@@ -30,5 +30,26 @@ public class InputManager : MonoBehaviour
             transArray[0].transform.position = new Vector3(transArray[0].position.x, transArray[1].position.y, transArray[0].position.z);
             transArray[1].transform.position = new Vector3(transArray[1].position.x, temp, transArray[1].position.z);
         }
+        #region Qpressed
+        if(Input.GetButtonUp("Fire1"))
+        {
+            float x = Random.Range(51, 255);
+            x = x/255;
+
+            float z = Random.Range(51,255);
+            z = z/255;
+           
+            GameObject.FindWithTag("Red").GetComponent<PrintAndHide>().rend.material.color = new Color(x,0.0f,0.0f);
+            GameObject.FindWithTag("Blue").GetComponent<PrintAndHide>().rend.material.color = new Color(0.0f,0.0f,z);
+
+            Debug.Log("Red: " + GameObject.FindWithTag("Red").GetComponent<PrintAndHide>().rend.material.color);
+            Debug.Log("Blue: " + GameObject.FindWithTag("Blue").GetComponent<PrintAndHide>().rend.material.color);
+        }
+        #endregion
+
+        //if(Input.GetKeyDown(KeyCode.E))
+        {
+
+        }
     }
 }
