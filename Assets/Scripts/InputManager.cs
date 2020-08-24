@@ -5,6 +5,9 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     private Transform[] transArray;
+
+    public bool check;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,17 +42,36 @@ public class InputManager : MonoBehaviour
             float z = Random.Range(51,255);
             z = z/255;
            
+           check = GameObject.FindWithTag("Red").GetComponent<PrintAndHide>() || GameObject.FindWithTag("Blue").GetComponent<PrintAndHide>();
+
+            if(check)
+            {
             GameObject.FindWithTag("Red").GetComponent<PrintAndHide>().rend.material.color = new Color(x,0.0f,0.0f);
             GameObject.FindWithTag("Blue").GetComponent<PrintAndHide>().rend.material.color = new Color(0.0f,0.0f,z);
 
             Debug.Log("Red: " + GameObject.FindWithTag("Red").GetComponent<PrintAndHide>().rend.material.color);
             Debug.Log("Blue: " + GameObject.FindWithTag("Blue").GetComponent<PrintAndHide>().rend.material.color);
+            }
         }
         #endregion
 
-        //if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E))
         {
+            check = GameObject.FindWithTag("Red").GetComponent<PrintAndHide>() || GameObject.FindWithTag("Blue").GetComponent<PrintAndHide>();
 
+            if(check)
+            {
+                Destroy(GameObject.FindWithTag("Red").GetComponent<PrintAndHide>());
+                Destroy(GameObject.FindWithTag("Blue").GetComponent<PrintAndHide>());
+            }
+
+            else
+            {
+                GameObject.FindWithTag("Red").AddComponent<PrintAndHide>();
+                GameObject.FindWithTag("Red").SetActive(true);
+                GameObject.FindWithTag("Blue").AddComponent<PrintAndHide>();
+                GameObject.FindWithTag("Blue").SetActive(true);
+            }
         }
     }
 }
